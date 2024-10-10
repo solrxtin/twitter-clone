@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { protectRoute } from "../middleware/protectRoute.js";
-import { createPost, deletePost, commentOnPost, likeOrUnlikePost, getPosts, getPostsByUser, userLikedPosts, getFollowingPosts } from "../controllers/post.controller.js";
+import { createPost, deletePost, commentOnPost, likeOrUnlikePost, getPosts, getPostsByUser, userLikedPosts, getFollowingPosts } from "../controllers/post.controllers.js";
 
 const router = Router();
 
