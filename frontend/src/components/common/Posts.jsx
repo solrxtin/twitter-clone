@@ -4,8 +4,7 @@ import { POSTS } from "../../utils/db/dummy.js";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-const Posts = ({feedType}) => {
-
+const Posts = ({feedType, username, userId}) => {
 	const getPostEndpoint = () => {
 		switch (feedType) {
 			case "forYou":
@@ -13,7 +12,7 @@ const Posts = ({feedType}) => {
 			case "following":
 				return "/api/posts/following";
 			case "posts":
-				return `/api/posts/user/${username}`;
+				return `/api/posts/users/${username}`;
 			case "likes":
 				return `/api/posts/likes/${userId}`;
 			default:
@@ -43,7 +42,7 @@ const Posts = ({feedType}) => {
 
 	useEffect(() => {
 		refetch();
-	}, [feedType, refetch]);
+	}, [feedType, username, userId, refetch]);
 
 	return (
 		<>
@@ -54,7 +53,7 @@ const Posts = ({feedType}) => {
 					<PostSkeleton />
 				</div>
 			)}
-			{!isLoading && !isRefetching && posts?.length === 0 && <p className='text-center my-4'>No posts in this tab. Switch 👻</p>}
+			{!isLoading && !isRefetching && posts?.length === 0 && <p className='text-center my-4'>No {feedType} in this tab. Switch 👻</p>}
 			{!isLoading && !isRefetching && posts && (
 				<div>
 					{posts.map((post) => (
